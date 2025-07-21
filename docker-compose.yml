@@ -1,0 +1,13 @@
+services:
+  libsql:
+    image: ghcr.io/libsql/sqld:latest
+    container_name: libsql
+    ports:
+      - "8080:8080"   # HTTP API
+      - "5001:5001"   # gRPC (optional)
+    volumes:
+      - ./data:/var/lib/sqld
+    environment:
+      - SQLD_DB_PATH=/var/lib/sqld/mydb.db
+      - SQLD_HTTP_LISTEN_ADDR=0.0.0.0:8080
+      - SQLD_GRPC_LISTEN_ADDR=0.0.0.0:5001
